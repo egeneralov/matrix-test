@@ -47,7 +47,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            ghcr.io/${{ github.repository }}/first
+            ghcr.io/${{ github.repository }}/${{ matrix.version }}
           tags: |
             ${{ matrix.version }}-${{ matrix.pgversion }}
             type=ref,event=branch
