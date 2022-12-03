@@ -6,7 +6,25 @@ jobs:
     strategy:
       matrix:
         # os: [ubuntu-22.04, ubuntu-20.04]
-        version: [10, 12, 14]
+        version:
+          - v0.17.0
+          - v0.16.0
+          - v0.15.0
+          - v0.14.0
+          - v0.13.0
+          - v0.12.0
+          - v0.11.0
+          - v0.10.0
+          - v0.9.0
+          - v0.8.0
+        pgversion:
+          - 15.1-bullseye
+          - 14.6-bullseye
+          - 13.9-bullseye
+          - 12.13-bullseye
+          - 11.18-bullseye
+          - 10.23-bullseye
+          - 9.6-bullseye
     # runs-on: ${{ matrix.os }}
     runs-on: ubuntu-22.04
     steps:
@@ -33,7 +51,6 @@ jobs:
           images: |
             ghcr.io/${{ github.repository }}/first
           tags: |
-            type=schedule
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
@@ -43,6 +60,9 @@ jobs:
 
       - name: Docker build & push
         uses: docker/build-push-action@v3
+        build-args:
+          VERSION: ${{ matrix.version }}
+          PGVERSION: ${{ matrix.pgversion }}
         with:
           push: true
           tags: ${{ steps.first.outputs.tags }}
