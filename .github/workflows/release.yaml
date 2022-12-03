@@ -33,7 +33,7 @@ jobs:
         run: git clone https://github.com/sorintlab/stolon
 
       - name: checkout stolon version
-        run: cd stolon && git checkout ${{ matrix.version }} && cd ..
+        run: cd stolon && git checkout ${{ matrix.version }} && cd .. && cp Dockerfile stolon/Dockerfile
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
