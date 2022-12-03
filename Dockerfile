@@ -6,7 +6,7 @@ ENV \
   GO111MODULE=on \
   CGO_ENABLED=0 \
   GOOS=linux
-WORKDIR /go/src/github.com/rancher/kafka_exporter
+WORKDIR /go/src/github.com/sorintlab/stolon
 ADD . .
 RUN go build -v -installsuffix cgo -ldflags="-w -X github.com/sorintlab/stolon/cmd.Version=${VERSION} -s" -o /go/bin/keeper cmd/keeper/*.go
 RUN go build -v -installsuffix cgo -ldflags="-w -X github.com/sorintlab/stolon/cmd.Version=${VERSION} -s" -o /go/bin/proxy cmd/proxy/*.go
