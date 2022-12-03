@@ -68,5 +68,5 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7
           network: host
           build-args:
-            - PGVERSION=${{ matrix.pgversion }}
-            - VERSION=${{ matrix.version }}
+            PGVERSION: ${{ matrix.pgversion }}
+            # - VERSION=${{ matrix.version }}
