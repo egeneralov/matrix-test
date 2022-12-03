@@ -60,12 +60,12 @@ jobs:
 
       - name: Docker build & push
         uses: docker/build-push-action@v3
-        build-args:
-          VERSION: ${{ matrix.version }}
-          PGVERSION: ${{ matrix.pgversion }}
         with:
           push: true
           tags: ${{ steps.first.outputs.tags }}
           labels: ${{ steps.first.outputs.labels }}
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7
           network: host
+          build-args:
+            VERSION: ${{ matrix.version }}
+            PGVERSION: ${{ matrix.pgversion }}
