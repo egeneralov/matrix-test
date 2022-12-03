@@ -29,6 +29,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@master
 
+      - name: clone stolon
+        run: git clone https://github.com/sorintlab/stolon
+
+      - name: checkout stolon version
+        run: cd stolon && git checkout ${{ matrix.version }} && cd ..
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -59,6 +65,7 @@ jobs:
           tags: ${{ steps.first.outputs.tags }}
           labels: ${{ steps.first.outputs.labels }}
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7
+          context: stolon
           network: host
           build-args: |
             PGVERSION=${{ matrix.pgversion }}
